@@ -1,5 +1,6 @@
 package com.example.exmencrud
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -17,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     
     private lateinit var recyclerViewProductos: RecyclerView
     private lateinit var tvEmptyState: MaterialTextView
-    private lateinit var fabAgregarProducto: FloatingActionButton
-    private lateinit var productoAdapter: ProductoAdapter
+    private lateinit var fabAgregarProducto: FloatingActionButton //declarado
+
     
     private val productos = mutableListOf<Producto>()
     private var nextId = 1
@@ -27,13 +30,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        
-        inicializarVistas()
-        configurarRecyclerView()
-        configurarEventos()
-        cargarDatosEjemplo()
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        fabAgregarProducto=findViewById(R.id.btnAgregarProducto)
+        fabAgregarProducto.setOnClickListener {
+            startActivity(Intent(this,IngresarProduct::class.java))
+            finish()
+        }
     }
-    
+    /*
     private fun inicializarVistas() {
         recyclerViewProductos = findViewById(R.id.recyclerViewProductos)
         tvEmptyState = findViewById(R.id.tvEmptyState)
@@ -248,4 +256,6 @@ class MainActivity : AppCompatActivity() {
             tvEmptyState.visibility = View.GONE
         }
     }
+
+     */
 }

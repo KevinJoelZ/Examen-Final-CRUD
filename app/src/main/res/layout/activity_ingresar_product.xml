@@ -45,5 +45,9 @@
         android:text="Eliminar Producto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
+    <Button
+        android:id="@+id/btnModificar"
+        android:text="Modificar Producto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

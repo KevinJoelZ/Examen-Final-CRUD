@@ -22,7 +22,8 @@ class ProductoAdapter(
             binding.btnEditarProducto.setOnClickListener {
                 onEditarClick(producto)
             }
-            
+            // Este botón aparece en cada producto del RecyclerView
+// Al presionar, se llama al callback de eliminación definido en la actividad
             binding.btnEliminarProducto.setOnClickListener {
                 onEliminarClick(producto)
             }

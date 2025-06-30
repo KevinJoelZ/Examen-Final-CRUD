@@ -1,16 +1,16 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id("com.android.application") version "8.5.0"
+    id("org.jetbrains.kotlin.android") version "1.9.23"
 }
 
 android {
     namespace = "com.example.exmencrud"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.exmencrud"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -34,7 +34,7 @@ android {
         jvmTarget = "1.8"
     }
     viewBinding{
-        enable = true
+        enabled = true
     }
 }
 

@@ -119,7 +119,7 @@ class ProductoDatabase(context: Context) : SQLiteOpenHelper(context, DATABASE_NA
         db.close()
         return result
     }
-
+// Función que elimina un producto según su ID desde la base de datos SQLite
     fun eliminarProducto(id: Int): Int {
         val db = this.writableDatabase
         val result = db.delete(TABLE_PRODUCTOS, "$KEY_ID = ?", arrayOf(id.toString()))

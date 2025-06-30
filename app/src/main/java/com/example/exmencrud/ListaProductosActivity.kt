@@ -34,7 +34,11 @@ class ListaProductosActivity : AppCompatActivity() {
         adapter = ProductoAdapter(
             productos = productos,
             onEditarClick = { producto -> editarProducto(producto) },
+            //  Este callback se activa cuando se presiona el botón "Eliminar" en la lista
+            // Llama a la función que abre un cuadro de diálogo para confirmar la eliminación
             onEliminarClick = { producto -> confirmarEliminacion(producto) }
+
+                    onEliminarClick = { producto -> confirmarEliminacion(producto) }
         )
         
         binding.recyclerViewProductos.layoutManager = LinearLayoutManager(this)
@@ -61,7 +65,7 @@ class ListaProductosActivity : AppCompatActivity() {
         intent.putExtra("producto_id", producto.id)
         startActivityForResult(intent, REQUEST_CODE_EDITAR_PRODUCTO)
     }
-
+// Muestra un cuadro de confirmación antes de eliminar definitivamente un producto
     private fun confirmarEliminacion(producto: Producto) {
         AlertDialog.Builder(this)
             .setTitle("Confirmar Eliminación")
@@ -73,14 +77,18 @@ class ListaProductosActivity : AppCompatActivity() {
             .show()
     }
 
+//  Esta función elimina el producto de la base de datos y de la lista en pantalla
+
     private fun eliminarProducto(producto: Producto) {
         val filasAfectadas = productoDatabase.eliminarProducto(producto.id)
         if (filasAfectadas > 0) {
+            // Si la eliminación fue exitosa, se actualiza la lista
             productos.remove(producto)
             adapter.notifyDataSetChanged()
-            cargarProductos() // Actualizar estado vacío
+            cargarProductos() // Refresca la vista
             Toast.makeText(this, "Producto eliminado exitosamente", Toast.LENGTH_SHORT).show()
         } else {
+            // Si algo sale mal, se muestra un error
             Toast.makeText(this, "Error al eliminar el producto", Toast.LENGTH_SHORT).show()
         }
     }

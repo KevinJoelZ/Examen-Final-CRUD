@@ -36,7 +36,7 @@ class IngresarProduct : AppCompatActivity() {
                 guardarProducto()
             }
         }
-//MOLO ELIMINAR
+//MOLO ELIMINAR..
         binding.btnEliminar.setOnClickListener {
             if (modoEdicion && productoActual != null) {
                 mostrarDialogoConfirmarEliminacion()
@@ -132,8 +132,8 @@ class IngresarProduct : AppCompatActivity() {
             .setNegativeButton("Cancelar", null)
             .show()
     }
-    //Llama a la función eliminarProducto de tu clase ProductoDatabase.
-    //Si la eliminación fue exitosa (filas afectadas > 0), muestra un mensaje y cierra la pantalla.
+    //Llama a la función eliminarProducto de tu clase ProductoDatabase...
+    //Si la eliminación fue exitosa (filas afectadas > 0), muestra un mensaje y cierra la pantalla...
     private fun eliminarProducto() {
         if (productoActual != null) {
             try {

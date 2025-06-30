@@ -37,8 +37,6 @@ class ListaProductosActivity : AppCompatActivity() {
             //  Este callback se activa cuando se presiona el botón "Eliminar" en la lista.
             // Llama a la función que abre un cuadro de diálogo para confirmar la eliminación.
             onEliminarClick = { producto -> confirmarEliminacion(producto) }
-
-                    onEliminarClick = { producto -> confirmarEliminacion(producto) }
         )
         
         binding.recyclerViewProductos.layoutManager = LinearLayoutManager(this)

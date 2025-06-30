@@ -24,10 +24,16 @@ class IngresarProduct : AppCompatActivity() {
         // Configurar botones
         configurarBotones()
 
-        // Verificar si viene en modo edición
+        /**
+         * Verifica si la actividad se inició en modo edición.
+         * Si se proporciona un `producto_id` en el Intent, se carga el producto correspondiente
+         * y se configura la interfaz para la edición.
+         */
         verificarModoEdicion()
     }
-
+    /**
+     * Configura los listeners de los botones de la interfaz.
+     */
     private fun configurarBotones() {
         binding.btnGuardar.setOnClickListener {
             if (modoEdicion) {
@@ -57,7 +63,10 @@ class IngresarProduct : AppCompatActivity() {
             mostrarListaProductos()
         }
     }
-
+    /**
+     * Verifica si la actividad se inició en modo edición.
+     * Si se proporciona un `producto_id` en el Intent, se carga el producto correspondiente.
+     */
     private fun verificarModoEdicion() {
         val productoId = intent.getIntExtra("producto_id", -1)
         if (productoId != -1) {
@@ -69,7 +78,10 @@ class IngresarProduct : AppCompatActivity() {
             }
         }
     }
-
+    /**
+     * Carga los datos de un producto en los campos de la interfaz.
+     * @param producto El producto cuyos datos se cargarán.
+     */
     private fun cargarDatosProducto(producto: Producto) {
         binding.nameProduct.setText(producto.name)
         binding.descriptionProduct.setText(producto.description)
@@ -77,7 +89,10 @@ class IngresarProduct : AppCompatActivity() {
         binding.stockProduct.setText(producto.stock.toString())
         binding.categoryProduct.setText(producto.category)
     }
-
+    /**
+     * Guarda un nuevo producto en la base de datos.
+     * Valida los campos y, si son válidos, agrega el producto y finaliza la actividad.
+     */
     private fun guardarProducto() {
         val producto = validarCampos()
         if (producto != null) {
@@ -99,7 +114,10 @@ class IngresarProduct : AppCompatActivity() {
             }
         }
     }
-
+    /**
+     * Modifica un producto existente en la base de datos.
+     * Valida los campos y, si son válidos y hay un producto actual, actualiza el producto y finaliza la actividad.
+     */
     private fun modificarProducto() {
         val producto = validarCampos()
         if (producto != null && productoActual != null) {
@@ -121,7 +139,10 @@ class IngresarProduct : AppCompatActivity() {
             }
         }
     }
-
+    /**
+     * Muestra un diálogo de confirmación antes de eliminar un producto.
+     * Si el usuario confirma, se llama a `eliminarProducto()`.
+     */
     private fun mostrarDialogoConfirmarEliminacion() {
         AlertDialog.Builder(this)
             .setTitle("Confirmar Eliminación")
@@ -132,7 +153,10 @@ class IngresarProduct : AppCompatActivity() {
             .setNegativeButton("Cancelar", null)
             .show()
     }
-
+    /**
+     * Elimina el producto actual de la base de datos.
+     * Si la eliminación es exitosa, finaliza la actividad.
+     */
     private fun eliminarProducto() {
         if (productoActual != null) {
             try {
@@ -152,12 +176,18 @@ class IngresarProduct : AppCompatActivity() {
             }
         }
     }
-
+    /**
+     * Inicia la actividad `ListaProductosActivity` para mostrar la lista de productos.
+     */
     private fun mostrarListaProductos() {
         val intent = Intent(this, ListaProductosActivity::class.java)
         startActivity(intent)
     }
-
+    /**
+     * Valida los campos de entrada del producto.
+     * Muestra mensajes de error si algún campo no es válido.
+     * @return El objeto `Producto` si todos los campos son válidos, `null` en caso contrario.
+     */
     private fun validarCampos(): Producto? {
         val nombre = binding.nameProduct.text.toString().trim()
         val descripcion = binding.descriptionProduct.text.toString().trim()
@@ -214,7 +244,9 @@ class IngresarProduct : AppCompatActivity() {
             category = categoria
         )
     }
-
+    /**
+     * Limpia los campos de entrada de la interfaz y establece el foco en el campo de nombre.
+     */
     private fun limpiarCampos() {
         binding.nameProduct.text.clear()
         binding.descriptionProduct.text.clear()
@@ -223,7 +255,9 @@ class IngresarProduct : AppCompatActivity() {
         binding.categoryProduct.text.clear()
         binding.nameProduct.requestFocus()
     }
-
+    /**
+     * Se llama cuando la actividad está siendo destruida. Cierra la conexión a la base de datos.
+     */
     override fun onDestroy() {
         super.onDestroy()
         productoDatabase.close()

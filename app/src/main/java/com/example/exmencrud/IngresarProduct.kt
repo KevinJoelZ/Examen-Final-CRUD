@@ -18,10 +18,10 @@ class IngresarProduct : AppCompatActivity() {
         binding = ActivityIngresarProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializar base de datos
+        // Inicializar base de datos.
         productoDatabase = ProductoDatabase(this)
 
-        // Configurar botones
+        // Configurar botones.
         configurarBotones()
 
         // Verificar si viene en modo edición

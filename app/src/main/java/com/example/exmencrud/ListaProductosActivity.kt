@@ -34,8 +34,8 @@ class ListaProductosActivity : AppCompatActivity() {
         adapter = ProductoAdapter(
             productos = productos,
             onEditarClick = { producto -> editarProducto(producto) },
-            //  Este callback se activa cuando se presiona el botón "Eliminar" en la lista
-            // Llama a la función que abre un cuadro de diálogo para confirmar la eliminación
+            //  Este callback se activa cuando se presiona el botón "Eliminar" en la lista.
+            // Llama a la función que abre un cuadro de diálogo para confirmar la eliminación.
             onEliminarClick = { producto -> confirmarEliminacion(producto) }
 
                     onEliminarClick = { producto -> confirmarEliminacion(producto) }
